@@ -13,14 +13,14 @@ namespace HotelReservationSystem
         public void AddHotels()
         {
             ///Addding hotels to list
-            hotelList.Add(new HotelDetail("LakeWood", 110));
-            hotelList.Add(new HotelDetail("BridgeWood", 160));
-            hotelList.Add(new HotelDetail("RidgeWood", 220));
+            hotelList.Add(new HotelDetail("LakeWood", 110, 90));
+            hotelList.Add(new HotelDetail("BridgeWood", 150, 50));
+            hotelList.Add(new HotelDetail("RidgeWood", 220, 150));
             Console.WriteLine("Hotels are added into the list");
             ///Displaying added hotels into list
             foreach (var hotels in hotelList)
             {
-                Console.WriteLine(hotels.hotelName + " " + hotels.weekdayRegularRates);
+                Console.WriteLine("Hotel Name"+hotels.hotelName + "  Weekday Rates" + hotels.weekdayRegularRates+"  Weekend rates" +hotels.weekendRegularRates);
             }
         }
         /// <summary>
