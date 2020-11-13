@@ -15,14 +15,14 @@ namespace HotelReservationSystem
         public void AddHotels()
         {
             ///Addding hotels to list with weekday and weekend rates
-            hotelList.Add(new HotelDetail("LakeWood", 110, 90));
-            hotelList.Add(new HotelDetail("BridgeWood", 150, 50));
-            hotelList.Add(new HotelDetail("RidgeWood", 220, 150));
+            hotelList.Add(new HotelDetail("LakeWood", 110, 90,3));
+            hotelList.Add(new HotelDetail("BridgeWood", 150, 50,4));
+            hotelList.Add(new HotelDetail("RidgeWood", 220, 150,5));
             Console.WriteLine("Hotels are added into the list");
             ///Displaying added hotels into list
             foreach (var hotels in hotelList)
             {
-                Console.WriteLine("Hotel Name" + hotels.hotelName + "  Weekday Rates" + hotels.weekdayRegularRates + "  Weekend rates" + hotels.weekendRegularRates);
+                Console.WriteLine("Hotel Name" + hotels.hotelName + "  Weekday Rates" + hotels.weekdayRegularRates + "  Weekend rates" + hotels.weekendRegularRates+"  Ratings " + hotels.starRating);
             }
         }
         public void AddingDaysToList(DateTime checkInDate, DateTime checkOutDate)
