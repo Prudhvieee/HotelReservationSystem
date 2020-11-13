@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 namespace HotelReservationSystem
@@ -8,11 +9,12 @@ namespace HotelReservationSystem
         ///creating a list, it contains hotel names and prices
         List<HotelDetail> hotelList = new List<HotelDetail>();
         SortedDictionary<int, string> sortByPrice = new SortedDictionary<int, string>();
+        ArrayList numberOfDays = new ArrayList();
         ///UC-1
         ///AddHotels method is used to add hotels into list
         public void AddHotels()
         {
-            ///Addding hotels to list
+            ///Addding hotels to list with weekday and weekend rates
             hotelList.Add(new HotelDetail("LakeWood", 110, 90));
             hotelList.Add(new HotelDetail("BridgeWood", 150, 50));
             hotelList.Add(new HotelDetail("RidgeWood", 220, 150));
@@ -20,7 +22,15 @@ namespace HotelReservationSystem
             ///Displaying added hotels into list
             foreach (var hotels in hotelList)
             {
-                Console.WriteLine("Hotel Name"+hotels.hotelName + "  Weekday Rates" + hotels.weekdayRegularRates+"  Weekend rates" +hotels.weekendRegularRates);
+                Console.WriteLine("Hotel Name" + hotels.hotelName + "  Weekday Rates" + hotels.weekdayRegularRates + "  Weekend rates" + hotels.weekendRegularRates);
+            }
+        }
+        public void AddingDaysToList(DateTime checkInDate, DateTime checkOutDate)
+        {
+            while (checkOutDate >= checkInDate)
+            {
+                numberOfDays.Add(checkInDate.DayOfWeek);
+                checkInDate = checkInDate.AddDays(1);
             }
         }
         /// <summary>
@@ -32,13 +42,19 @@ namespace HotelReservationSystem
         {
             if (checkInDate < checkOutDate)
             {
-                TimeSpan stayingPeriod = checkOutDate.Subtract(checkInDate);
                 foreach (var hotels in hotelList)
                 {
                     int total = 0;
-                    for (int i = 0; i <= stayingPeriod.TotalDays; i++)
+                    for (int index = 0; index < numberOfDays.Count; index++)
                     {
-                        total = total + hotels.weekdayRegularRates;
+                        if (numberOfDays[index].ToString().Equals("Saturday") || numberOfDays[index].ToString().Equals("Sunday"))
+                        {
+                            total = total + hotels.weekendRegularRates;
+                        }
+                        else
+                        {
+                            total = total + hotels.weekdayRegularRates;
+                        }
                     }
                     Console.WriteLine("Hotel Name : {0} and Total Price : {1}", hotels.hotelName, total);
                     sortByPrice.Add(total, hotels.hotelName);
